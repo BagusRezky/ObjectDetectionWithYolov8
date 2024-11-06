@@ -1,4 +1,5 @@
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import "../../src/index.css";
 
 const data = [
   { name: "B1", value: 300 },
@@ -11,17 +12,22 @@ const data = [
 
 function BarGraph() {
   return (
-    <div className="bg-white shadow rounded-lg p-4">
-      <h4 className="font-bold text-gray-600">
+    <div className="custom-card flex flex-col gap-4">
+      <h4 className="font-inter-tight text-base font-regular text-neutral-black">
         Jumlah Interaksi per Billboard
       </h4>
-      <BarChart width={400} height={300} data={data}>
-        <Bar dataKey="value" fill="#82ca9d" />
-        <CartesianGrid stroke="#ccc" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-      </BarChart>
+      <div className="w-full h-[300px]">
+        <ResponsiveContainer width="100%" height="100%">
+
+        <BarChart data={data}>
+          <Bar dataKey="value" fill="#82ca9d" />
+          <CartesianGrid stroke="#ccc" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+        </BarChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 }

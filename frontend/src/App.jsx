@@ -3,16 +3,16 @@ import AllBillboard from "./pages/AllBilboard";
 import ReportList from "./pages/ReportList";
 import BillboardReport from "./pages/BillboardReport";
 import './index.css'
-import Sidebar from "./components/SideBar";
+import Sidebar from "./components/sidebar/SideBar";
 import { Routes, Route } from "react-router-dom";
 import BillboardDetail from "./pages/BillboardDetail";
 
 
 function App() {
   return (
-    <div className="flex">
+    <div className="">
       <Sidebar />
-      <div className="flex-grow p-8">
+      <div className="flex-grow sm:ml-[240px]">
         <Routes>
           <Route path="/overview" element={<DashboardContainer />} />
           <Route path="/all-billboard" element={<AllBillboard />} />

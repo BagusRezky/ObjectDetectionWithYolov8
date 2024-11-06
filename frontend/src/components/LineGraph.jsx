@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import '../../src/index.css';
 import {
   LineChart,
   Line,
@@ -6,6 +7,7 @@ import {
   XAxis,
   YAxis,
   Tooltip,
+  ResponsiveContainer,
 } from "recharts";
 
 function LineGraph() {
@@ -13,7 +15,7 @@ function LineGraph() {
 
   useEffect(() => {
     fetchData();
-  }, );
+  },);
 
   const fetchData = async () => {
     try {
@@ -52,17 +54,22 @@ function LineGraph() {
   };
 
   return (
-    <div className="bg-white shadow rounded-lg p-4">
-      <h4 className="font-bold text-gray-600">
+    <div className="custom-card flex flex-col gap-4">
+      <h4 className="font-inter-tight text-base font-regular text-neutral-black">
         Total Interaksi yang Melewati Billboard per Bulan
       </h4>
-      <LineChart width={1400} height={300} data={data}>
-        <Line type="monotone" dataKey="total" stroke="#8884d8" />
-        <CartesianGrid stroke="#ccc" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-      </LineChart>
+      <div className="w-full h-[300px]">
+        <ResponsiveContainer width="100%" height="100%">
+
+          <LineChart data={data}>
+            <Line type="monotone" dataKey="total" stroke="#8884d8" />
+            <CartesianGrid stroke="#ccc" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 }
