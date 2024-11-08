@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: 'Inter-Tight';
+    src:
+        url('../src/assets/fonts/InterTight-VariableFont_wght.ttf') format('trueType'),
+}
+
+
+.active-menu {}
+
+.inactive-menu {
+    @apply h-20
+}
+
+.safe-area-page {
+    min-height: calc(100vh - 88px);
+    @apply flex flex-col gap-4 mt-[88px] p-4 bg-slate-50;
+}
+
+.custom-card {
+    @apply bg-white border border-slate-200 rounded-xl p-4;
+
+}
+
+.focus-input {
+    @apply focus-within:outline focus-within:-outline-offset-1 focus-within:outline-2 focus-within:outline-navy focus-within:ring focus-within:ring-navy focus-within:ring-opacity-20;
+}

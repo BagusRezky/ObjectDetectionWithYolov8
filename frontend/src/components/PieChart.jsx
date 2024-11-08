@@ -1,4 +1,5 @@
 import { PieChart, Pie, Tooltip } from "recharts";
+import "../../src/index.css";
 
 const data = [
   { name: "Mobile", value: 240 },
@@ -8,7 +9,10 @@ const data = [
 
 function MyPieChart() {
   return (
-    <div className="bg-white shadow rounded-lg">
+    <div className="custom-card flex flex-col gap-4">
+      <h4 className="font-inter-tight text-base font-regular text-neutral-black">
+        Jumlah
+      </h4>
       <PieChart width={200} height={200}>
         <Pie
           data={data}

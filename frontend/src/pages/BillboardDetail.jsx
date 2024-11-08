@@ -5,6 +5,10 @@ import mqtt from "mqtt";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
 import Hls from "hls.js";
+import TopBar from "../components/topbar/TopBar";
+import "../../src/index.css";
+import { IconCalendar, IconClockHour1, IconClockHour5, IconLabel, IconMapPin } from "@tabler/icons-react";
+import CustomIconLabel from "../components/label/CustomIconLabel";
 
 function BillboardDetail() {
   const { id } = useParams();
@@ -174,32 +178,98 @@ function BillboardDetail() {
   };
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold mb-4">Billboard Detail</h2>
-      <div className="flex flex-wrap justify-around items-center mt-2">
-        <video
-          ref={videoRef}
-          id="rtmp-video"
-          className="video-js vjs-default-skin"
-          width="640"
-          height="480"
-          autoPlay
-          muted
-        ></video>
-        {!isReady && <p>Loading video...</p>}
-        {isReady && (
-          <div className="bg-gray-100 p-9 rounded">
-            {/* Menampilkan waktu dinamis */}
-            <p className="text-md mb-2">{`Hari/Tanggal: ${currentTime.date}`}</p>
-            <p className="text-md mb-2">{`Waktu: ${currentTime.time}`}</p>
-            <p className="text-md mb-2">{`Lokasi: ${billboard.location}`}</p>
-            <div className="mt-10 text-center">
-              <p className="text-2xl font-bold">Jumlah Interaksi</p>
-              <p className="text-5xl font-bold">{`Down: ${interactions.going_down}`}</p>
-              <p className="text-5xl font-bold">{`Up: ${interactions.going_up}`}</p>
-            </div>
+    <div className="flex flex-col">
+      <TopBar title="Billboard Detail" />
+      <div className="safe-area-page flex flex-col gap-4">
+        <div className="grid grid-cols-8 gap-4">
+          <div className="custom-card aspect-auto h-fit col-span-8 lg:col-span-6 flex flex-col gap-4">
+
+            {!isReady &&
+              (
+                <span className="rounded overflow-hidden aspect-[4/3] w-full bg-neutral-100"> 
+                </span>
+              )}
+            {isReady &&
+              (
+                <div className="rounded overflow-hidden">
+                  <video
+                    ref={videoRef}
+                    id="rtmp-video"
+                    className="video-js vjs-fluid vjs-default-skin rounded"
+                    width={640}
+                    height={480}
+                    autoPlay
+                    muted
+                  ></video>
+                </div>
+              )}
+
           </div>
-        )}
+          {!isReady && (
+            <div className="custom-card h-fit col-span-8 lg:col-span-2 flex flex-col gap-4">
+              <div className="flex flex-col gap-2">
+                <span className="h-6 w-[120px] rounded-full bg-neutral-100 mb-2"></span>
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-center gap-1">
+                    <span className="h-5 w-5 rounded-full bg-neutral-100"></span>
+                    <span className="h-5 w-[100px] rounded-full bg-neutral-100"></span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <span className="h-5 w-5 rounded-full bg-neutral-100"></span>
+                    <span className="h-5 w-[100px] rounded-full bg-neutral-100"></span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <span className="h-5 w-5 rounded-full bg-neutral-100"></span>
+                    <span className="h-5 w-[100px] rounded-full bg-neutral-100"></span>
+                  </div>
+
+                </div>
+              </div>
+              <div className="grid grid-cols-1 grid-rows-2 gap-4 h-[240px]">
+                <span className="flex flex-col items-center justify-center py-3 gap-2 h-full bg-neutral-100 rounded-lg">
+                </span>
+                <span className="flex flex-col items-center justify-center py-3 gap-2 h-full bg-neutral-100 rounded-lg">
+                </span>
+              </div>
+            </div>
+          )}
+          {isReady && (
+            <div className="custom-card h-fit col-span-8 lg:col-span-2 flex flex-col gap-4">
+              <div className="flex flex-col gap-2">
+                <h3 className="font-inter-tight font-medium text-xl text-neutral-black">Interaksi</h3>
+                <div className="flex flex-col gap-2">
+                  <CustomIconLabel icon={IconCalendar} label={`${currentTime.date}`} color="#1B1B1B" />
+                  <CustomIconLabel icon={IconClockHour5} label={`${currentTime.time}`} color="#1B1B1B" />
+                  <CustomIconLabel icon={IconMapPin} label={`${billboard.location}`} color="#1B1B1B" />
+                </div>
+              </div>
+              <div className="grid grid-cols-1 grid-rows-2 gap-4 flex-grow">
+                <div className="flex flex-col items-center justify-center py-3 gap-2 h-full bg-slate-100 rounded-lg">
+                  <h4 className="font-inter-tight font-medium text-base text-navy text-opacity-40">Going Up</h4>
+                  <p className="font-inter-tight font-semibold text-[72px] text-navy ">{`${interactions.going_down}`}</p>
+                </div>
+                <div className="flex flex-col items-center justify-center py-3 gap-2 h-full bg-slate-100 rounded-lg">
+                  <h4 className="font-inter-tight font-medium text-base text-navy text-opacity-40">Going Down</h4>
+                  <p className="font-inter-tight font-semibold text-[72px] text-navy ">{`${interactions.going_up}`}</p>
+
+                </div>
+              </div>
+            </div>
+
+            // <div className="bg-gray-100 p-9 rounded">
+            //   {/* Menampilkan waktu dinamis */}
+            //   <p className="text-md mb-2">{`Hari/Tanggal: `}</p>
+            //   <p className="text-md mb-2">{`Waktu: `}</p>
+            //   <p className="text-md mb-2">{`Lokasi: `}</p>
+            //   <div className="mt-10 text-center">
+            //     <p className="text-2xl font-bold">Jumlah Interaksi</p>
+            //     <p className="text-5xl font-bold">{`Down: `}</p>
+            //     <p className="text-5xl font-bold">{`Up: `}</p>
+            //   </div>
+            // </div>
+          )}
+
+        </div>
       </div>
     </div>
   );
